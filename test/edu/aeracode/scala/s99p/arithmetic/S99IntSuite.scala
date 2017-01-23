@@ -43,4 +43,28 @@ class S99IntSuite extends FunSuite {
     assert(315.primeFactorMultiplicity == List((3, 2), (5, 1), (7, 1)))
     assert(4.primeFactorMultiplicity == List((2, 2)))
   }
+
+
+  test("P37. phi") {
+    assert(10.totient == 10.phi)
+    assert(120.totient == 120.phi)
+  }
+
+  // P38 is missed for now
+
+  test("P39. phi") {
+    val range = listPrimesInRange(7, 31)
+    assert(range == List(7, 11, 13, 17, 19, 23, 29, 31))
+  }
+
+  test("P40. goldbach") {
+    val v = 28.goldbach
+    assert(v == (5, 23))
+  }
+
+  test("P41. goldbach list"){
+    printGoldbachList(9, 20)
+    printGoldbachListLimited(1, 2000, 50)
+  }
+
 }

@@ -22,6 +22,7 @@ import edu.aeracode.scala.s99p.List.notDefined
   */
 sealed trait List[+E] {
 
+
   /** shortened type alias */
   private type L[+T] = List[T]
 
@@ -60,16 +61,22 @@ sealed trait List[+E] {
     *
     * @note Build upon a fold and reverse functions
     */
-  def map[T](f: E => T): List[T] = mapReverse(f).reverse
+  def map[T](f: E => T): L[T] = mapReverse(f).reverse
 
-  def mapReverse[T](f: E => T): List[T] = fold(nil[T]) { (r, e) => f(e) +: r }
+  def mapReverse[T](f: E => T): L[T] = fold(nil[T]) { (r, e) => f(e) +: r }
 
-  def flatten[B](implicit toList: E => List[B]): List[B] = reverse.flattenReverse(toList)
+  def flatten[B](implicit toList: E => L[B]): L[B] = reverse.flattenReverse(toList)
 
-  def flattenReverse[B](implicit toList: E => List[B]): List[B] =
+  def flattenReverse[B](implicit toList: E => L[B]): L[B] =
     fold(nil[B]) { (r, e) => toList(e) :++ r }
 
-  def flatMap[T](f: E => List[T]): List[T] = fold(nil[T]) { (r, e) => r :++ f(e) }
+  def flatMap[T](f: E => L[T]): L[T] = fold(nil[T]) { (r, e) => r :++ f(e) }
+
+  def filterReverse(p: (E) => Boolean): L[E] = fold(nil[E]) { (r, e) =>
+    if (p(e)) e +: r else r
+  }
+
+  def filter(p: (E) => Boolean): L[E] = filterReverse(p).reverse
 
   override def toString: String =
     if (isEmpty) "Nil"
