@@ -1,7 +1,7 @@
 package edu.aeracode.scala.s99p.arithmetic
 
 import org.scalatest.FunSuite
-import edu.aeracode.scala.s99p.List
+import edu.aeracode.scala.s99p.list._
 
 class S99IntSuite extends FunSuite {
 
@@ -62,7 +62,7 @@ class S99IntSuite extends FunSuite {
     assert(v == (5, 23))
   }
 
-  test("P41. goldbach list"){
+  test("P41. goldbach list") {
     printGoldbachList(9, 20)
     printGoldbachListLimited(1, 2000, 50)
   }

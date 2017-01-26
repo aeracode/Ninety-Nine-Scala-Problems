@@ -1,5 +1,7 @@
 package edu.aeracode.scala.s99p
 
+import edu.aeracode.scala.s99p.list._
+
 package object arithmetic {
 
   /** =[[http://aperiodic.net/phil/scala/s-99/ S-99: Ninety-Nine Scala Problems]]=
